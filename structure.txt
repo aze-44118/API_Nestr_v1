@@ -1,0 +1,32 @@
+/mon_briefing_project/
+│
+├── config/                    # Fichiers de configuration et variables d'environnement
+│   ├── .env                   # Clés API, réglages utilisateur
+│   └── settings.py            # Chargement de .env et configuration globale
+│
+├── data_fetchers/            # Récupération data - Input: user_id - Output: Raw Data
+│   ├── météo.py
+│   ├── calendrier.py
+│   └── news.py
+│
+├── models/                   # Gestion des LLM (OpenAI, Mistral...)
+│   ├── openai_client.py      # A ajouter plus tard pour le TTS
+│   ├── mistral_client.py
+│   └── generator.py          # Recuperation des data - Input: user_id - Output: summary_data
+│
+├── supabase/                 # Connexion et accès aux préférences utilisateurs
+│   ├── supabase_client.py
+│   └── user_data.py
+│
+├── output/                   # Distribution du résultat (email, podcast, RSS...)
+│   ├── email.py
+│   └── audio.py              # (futur TTS : Bark, Coqui, etc.)
+│
+├── utils/                    # Fonctions utilitaires (formatage, logs...)
+│   └── formatter.py
+│
+├── Route/                    # Fonctions utilitaires (formatage, logs...)
+│   └── briefing.py           # BP de clanchement du brief
+│
+├── briefing.py               # Script principal ou CLI
+└── requirements.txt          # Dépendances Python
