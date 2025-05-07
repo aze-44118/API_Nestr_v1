@@ -70,16 +70,16 @@ def generate_briefing():
         if not isinstance(podcast_text, str):
             return jsonify({"error": "no response from Mistral Agent"}), 502
     
-        
+        '''
         email_text = nestr_briefing_courriel(data_brut)
         if not isinstance(email_text, str):
             return jsonify({"error": "no response from courriel agent"}), 502
-        
+        '''
 
 
 
-        # ⑦ Output
-        
+        # ⑦ Output email
+        '''
         success = send_email(
             user_env.get("email", "aad.vergeron@gmail.com"),
             "Votre briefing du jour",
@@ -87,9 +87,9 @@ def generate_briefing():
         )
         if not success:
             return jsonify({"error": "failed to send email"}), 502
+        '''
         
-        
-
+        # ⑦ Output podcast
         try:
             rss_url = send_podcast(
                 user_id,
@@ -113,7 +113,7 @@ def generate_briefing():
         # ⑧ Tout est OK : 
         return jsonify({
             "status": "success",
-            "message": email_text,
+            # "message": email_text,
             "raw": data_brut,
             "html": rss_url,
             "podcast": podcast_text
