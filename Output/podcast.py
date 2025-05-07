@@ -1,10 +1,9 @@
 import os
 import datetime
 import xml.etree.ElementTree as ET
-from Models.google_tts_client import generate_audio_from_text_google
+from Models.radio_assembler import generate_multivoice_podcast
 from Supabase.supabase_client import get_client
 from Supabase.supabase_storage_api import delete_file, download_file, upload_file
-
 
 def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: str):
 
@@ -18,7 +17,7 @@ def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: s
         # ─── FIN MODE TEST ──────────────────────────────────────────────────────────
 
         # ─── MODE PROD ──────────────────────────────────────────────────────────────
-        audio_path = generate_audio_from_text_google(podcast_text, user_id)
+        audio_path = generate_multivoice_podcast(podcast_text, user_id)
         # ─── FIN MODE PROD ──────────────────────────────────────────────────────────
 
 
