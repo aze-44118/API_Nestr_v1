@@ -4,7 +4,7 @@ from google.cloud import texttospeech
 # Assure-toi que la variable d'environnement est définie
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "Config/google_credentials.json"
 
-def synthesize_text(text, output_filename):
+def generation_audio_from_text_google(text, output_filename):
     client = texttospeech.TextToSpeechClient()
 
     synthesis_input = texttospeech.SynthesisInput(text=text)

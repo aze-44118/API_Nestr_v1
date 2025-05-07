@@ -1,7 +1,7 @@
 import os
 import datetime
 import xml.etree.ElementTree as ET
-from Models.openai_client import generate_audio_from_text
+from Models.google_tts_client import generate_audio_from_text_google
 from Supabase.supabase_client import get_client
 from Supabase.supabase_storage_api import delete_file, download_file, upload_file
 
@@ -18,7 +18,7 @@ def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: s
         # ─── FIN MODE TEST ──────────────────────────────────────────────────────────
 
         # ─── MODE PROD ──────────────────────────────────────────────────────────────
-        audio_path = generate_audio_from_text(podcast_text, user_id)
+        audio_path = generate_audio_from_text_google(podcast_text, user_id)
         # ─── FIN MODE PROD ──────────────────────────────────────────────────────────
 
 
@@ -54,7 +54,7 @@ def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: s
         
         # Étape 3 – Générer l'URL publique
         public_url = f"https://kgncwfrhnadiufdozxno.supabase.co/storage/v1/object/public/{bucket_name}/{storage_path}"
-                
+
         # Étape 4 – Mise à jour du RSS par utilisateur
         from io import BytesIO  # en haut du fichier si pas encore là
         rss_file_name = "rss_feed.xml"
