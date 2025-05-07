@@ -21,7 +21,7 @@ def generate_audio_from_text_google(podcast_text: str, user_id: str) -> str:
 
     audio_config = texttospeech.AudioConfig(
         audio_encoding=texttospeech.AudioEncoding.MP3, 
-        peaking_rate=0.95,
+        speaking_rate=0.95,
         pitch=1.5,
         volume_gain_db=2.0,
         effects_profile_id=["telephony-class-application"]
