@@ -1,13 +1,18 @@
 import os
+import datetime
 from google.cloud import texttospeech
 
-# Assure-toi que la variable d'environnement est définie
+# Définit l’environnement pour Google Cloud
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "Config/google_credentials.json"
 
-def generation_audio_from_text_google(text, output_filename):
+def generate_audio_from_text_google(podcast_text: str, user_id: str) -> str:
+    """
+    Génére un MP3 à partir de texte via Google WaveNet.
+    :return: chemin local du fichier généré
+    """
     client = texttospeech.TextToSpeechClient()
 
-    synthesis_input = texttospeech.SynthesisInput(text=text)
+    synthesis_input = texttospeech.SynthesisInput(text=podcast_text)
 
     voice = texttospeech.VoiceSelectionParams(
         language_code="fr-FR",
@@ -24,6 +29,10 @@ def generation_audio_from_text_google(text, output_filename):
         audio_config=audio_config
     )
 
-    with open(output_filename, "wb") as out:
+    ts = datetime.datetime.utcnow().strftime('%Y-%m-%d_%H-%M-%S')
+    output_path = f"/tmp/{user_id}_{ts}_podcast.mp3"
+
+    with open(output_path, "wb") as out:
         out.write(response.audio_content)
-    print(f"Audio content written to file {output_filename}")
+
+    return output_path
