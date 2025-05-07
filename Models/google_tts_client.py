@@ -16,11 +16,15 @@ def generate_audio_from_text_google(podcast_text: str, user_id: str) -> str:
 
     voice = texttospeech.VoiceSelectionParams(
         language_code="fr-FR",
-        name="fr-FR-Wavenet-D"
+        name="fr-FR-Chirp-HD-D"
     )
 
     audio_config = texttospeech.AudioConfig(
-        audio_encoding=texttospeech.AudioEncoding.MP3
+        audio_encoding=texttospeech.AudioEncoding.MP3, 
+        peaking_rate=0.95,
+        pitch=1.5,
+        volume_gain_db=2.0,
+        effects_profile_id=["telephony-class-application"]
     )
 
     response = client.synthesize_speech(
