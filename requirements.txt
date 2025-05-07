@@ -6,3 +6,4 @@ requests>=2.0
 ics>=0.7
 supabase
 openai
+google-cloud-texttospeech

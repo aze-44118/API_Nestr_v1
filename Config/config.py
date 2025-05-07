@@ -44,6 +44,8 @@ try:
     BREVO_API_KEY         = secrets["BREVO_API_KEY"]
     STATIC_FOLDER         = secrets.get("STATIC_FOLDER", "Static")
     DATABASE_URL          = secrets["DATABASE_URL"]
+    GOOGLE_CREDENTIALS_PATH = secrets.get("GOOGLE_APPLICATION_CREDENTIALS_PATH", "Config/google_credentials.json")
+
 
 
 
