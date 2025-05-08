@@ -2,6 +2,7 @@ import os
 import datetime
 from typing import List, Dict
 from pydub import AudioSegment
+import requests
 from Models.google_tts_client import generate_audio_from_text_google
 from Models.elevenlab_client import generate_audio_from_text_elevenlab
 
