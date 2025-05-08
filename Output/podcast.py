@@ -99,7 +99,7 @@ def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: s
         if image_tag is None:
             image_tag = ET.SubElement(channel, "image")
             
-        ET.SubElement(image_tag, "url").text = "https://kgncwfrhnadiufdozxno.supabase.co/storage/v1/object/public/podcast/podcast_cover_2.png"
+        ET.SubElement(image_tag, "url").text = "https://kgncwfrhnadiufdozxno.supabase.co/storage/v1/object/public/podcast/podcast_cover_3.png"
         ET.SubElement(image_tag, "title").text = "Ton Podcast"
         ET.SubElement(image_tag, "link").text = rss_url
 

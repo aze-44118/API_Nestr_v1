@@ -2,10 +2,12 @@ import os
 import datetime
 from typing import List, Dict
 from pydub import AudioSegment
+"""
 import requests
 from Config import ELEVENLAB_API_KEY  # si ta clé vient d'un fichier de config
-from Models.google_tts_client import generate_audio_from_text_google
 from Models.elevenlab_client import generate_audio_from_text_elevenlab
+"""
+from Models.google_tts_client import generate_audio_from_text_google
 
 
 # Mapping des voix par speaker
@@ -36,28 +38,6 @@ def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr
     :return: chemin du fichier MP3 final
     """
 
-    API_KEY = "ta_clé_api"
-    headers = {
-        "xi-api-key": ELEVENLAB_API_KEY,
-        "Content-Type": "application/json"
-    }
-    response = requests.get("https://api.elevenlabs.io/v1/voices", headers=headers)
-    voices = response.json()
-
-
-    print("=== Résultat brut de l'API ===")
-    print(voices)
-
-    if "voices" in voices:
-        for voice in voices["voices"]:
-            labels = voice.get("labels", {})
-            if any(label in str(labels).lower() for label in ["narrator", "news", "radio"]):
-                print(f"🎙️ {voice['name']} → {voice['voice_id']} | labels={labels}")
-    else:
-        print("❌ Clé 'voices' absente dans la réponse ElevenLabs.")
-
-
-
     audio_segments = []
 
     temp_files = []  # ← on stocke ici tous les chemins de fichiers MP3 générés
@@ -73,7 +53,7 @@ def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr
         voice_name = VOICE_PROFILES.get(speaker, "fr-FR-Wavenet-B")
         print(f"🔊 Speaker: {speaker} — Voice: {voice_name}")
 
-        '''
+        
         # Appel du TTS avec voix personnalisée
         segment_path = generate_audio_from_text_google(
             podcast_text=text,
@@ -87,7 +67,7 @@ def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr
             user_id=f"{user_id}_{i}",
             voice_id=voice_id
         )
-
+        '''
         temp_files.append(segment_path)
         audio_segments.append(AudioSegment.from_mp3(segment_path))
 
