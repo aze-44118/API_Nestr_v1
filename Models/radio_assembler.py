@@ -44,6 +44,9 @@ def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr
     response = requests.get("https://api.elevenlabs.io/v1/voices", headers=headers)
     voices = response.json()
 
+    print("=== Résultat brut de l'API ===")
+    print(voices)
+
     for voice in voices['voices']:
         print(f"{voice['name']}: {voice['voice_id']}")
 
