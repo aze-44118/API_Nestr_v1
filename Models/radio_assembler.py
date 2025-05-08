@@ -50,7 +50,9 @@ def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr
 
     if "voices" in voices:
         for voice in voices["voices"]:
-            print(f"{voice['name']}: {voice['voice_id']}")
+            labels = voice.get("labels", {})
+            if any(label in str(labels).lower() for label in ["narrator", "news", "radio"]):
+                print(f"🎙️ {voice['name']} → {voice['voice_id']} | labels={labels}")
     else:
         print("❌ Clé 'voices' absente dans la réponse ElevenLabs.")
 
