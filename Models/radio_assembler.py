@@ -6,10 +6,10 @@ from Models.google_tts_client import generate_audio_from_text_google
 
 # Mapping des voix par speaker
 VOICE_PROFILES = {
-    "Walter": "fr-FR-Wavenet-B",
-    "Rebecca": "fr-FR-Wavenet-A",
-    "Melanie": "fr-FR-Wavenet-D",
-    "Alison": "fr-FR-Wavenet-C",
+    "Walter": "en-US-Neural2-J",
+    "Rebecca": "en-US-Neural2-F",
+    "Melanie": "en-US-Neural2-G",
+    "Alison": "en-US-Neural2-H",
 }
 
 INTRO_PATH = "Static/intro.mp3"

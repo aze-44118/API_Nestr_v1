@@ -24,10 +24,10 @@ def generate_audio_from_text_google(podcast_text: str, user_id: str, voice_name:
 
     audio_config = texttospeech.AudioConfig(
         audio_encoding=texttospeech.AudioEncoding.MP3,
-        speaking_rate=1.05,
-        pitch=3.0,
+        speaking_rate=1.10,
+        pitch=2.0,
         volume_gain_db=2.0,
-        effects_profile_id=["small-bluetooth-speaker-class-device"]
+        effects_profile_id=["headphone-class-device"]
     )
 
     response = client.synthesize_speech(
