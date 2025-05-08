@@ -34,6 +34,8 @@ def generate_audio_from_text_elevenlab(text: str, user_id: str, voice_id: str = 
             return None
 
         output_path = f"static/{user_id}_tts_eleven.mp3"
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        
         with open(output_path, "wb") as f:
             f.write(response.content)
 
