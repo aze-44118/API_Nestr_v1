@@ -46,6 +46,8 @@ try:
     DATABASE_URL          = secrets["DATABASE_URL"]
     GOOGLE_CREDENTIALS_PATH = secrets.get("GOOGLE_APPLICATION_CREDENTIALS_PATH", "Config/google_credentials.json")
     ELEVENLAB_API_KEY = secrets.get("ELEVENLAB_API_KEY")
+    print("🔑 ElevenLabs API Key chargée :", ELEVENLAB_API_KEY)
+
 
 
 
