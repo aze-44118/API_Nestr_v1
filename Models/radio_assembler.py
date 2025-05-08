@@ -16,7 +16,7 @@ INTRO_PATH = "Static/intro.mp3"
 OUTRO_PATH = "Static/outro.mp3"
 TEMP_DIR = "/tmp"
 
-def generate_multivoice_podcast(script: List[Dict[str, str]], user_id: str) -> str:
+def generate_audio_from_text_google(script: str, user_id: str, voice_name: str = "fr-FR-Wavenet-A") -> str:
     """
     Génère un podcast multi-voix avec générique depuis un script JSON.
     :param script: liste d'objets {"speaker": "...", "text": "..."}
@@ -36,7 +36,7 @@ def generate_multivoice_podcast(script: List[Dict[str, str]], user_id: str) -> s
         speaker = entry["speaker"]
         text = entry["text"]
         voice_name = VOICE_PROFILES.get(speaker, "fr-FR-Wavenet-B")
-
+        print(f"🔊 Speaker: {speaker} — Voice: {voice_name}")
         # Appel du TTS avec voix personnalisée
         segment_path = generate_audio_from_text_google(
             podcast_text=text,

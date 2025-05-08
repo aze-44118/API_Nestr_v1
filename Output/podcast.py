@@ -22,7 +22,7 @@ def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: s
 
           
         # ─── MODE PROD ──────────────────────────────────────────────────────────────
-        audio_path = generate_multivoice_podcast(script_json, user_id)
+        audio_path = generate_multivoice_podcast(script_json, user_id, first_name)
         # ─── FIN MODE PROD ──────────────────────────────────────────────────────────
 
 
