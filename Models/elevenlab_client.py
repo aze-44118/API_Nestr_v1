@@ -4,17 +4,16 @@ import requests
 ELEVENLAB_API_KEY = os.environ.get("ELEVENLAB_API_KEY")
 ELEVENLAB_VOICE_ID = os.environ.get("ELEVENLAB_VOICE_ID", "EXAVITQu4vr4xnSDxMaL")  # Voix par défaut
 
-def generate_audio_from_text_elevenlab(text: str, user_id: str) -> str:
+def generate_audio_from_text_elevenlab(text: str, user_id: str, voice_id: str = None) -> str:
     try:
         if not ELEVENLAB_API_KEY:
             raise ValueError("❌ API Key ElevenLabs manquante.")
         
-        print("🔑 Clé ElevenLabs chargée :", ELEVENLAB_API_KEY)
-        
         selected_voice_id = voice_id or ELEVENLAB_VOICE_ID
-        url = f"https://api.elevenlabs.io/v1/text-to-speech/{ELEVENLAB_VOICE_ID}"
+        url = f"https://api.elevenlabs.io/v1/text-to-speech/{selected_voice_id}"
+
         headers = {
-            "Authorization": f"Bearer sk_ce676d62a6dcb4910094211bfe884c83b2ed3190291e1917",
+            "xi-api-key": ELEVENLAB_API_KEY,
             "Content-Type": "application/json"
         }
 
@@ -30,7 +29,7 @@ def generate_audio_from_text_elevenlab(text: str, user_id: str) -> str:
         response = requests.post(url, json=payload, headers=headers)
 
         if response.status_code != 200:
-            print(f"❌ Erreur ElevenLabs: {response.status_code} - {response.text}")
+            print(f"❌ Erreur ElevenLabs (TTS): {response.status_code} - {response.text}")
             return None
 
         output_path = f"static/{user_id}_tts_eleven.mp3"
@@ -43,3 +42,4 @@ def generate_audio_from_text_elevenlab(text: str, user_id: str) -> str:
     except Exception as e:
         print(f"❌ Exception dans generate_audio_from_text_elevenlab: {e}")
         return None
+

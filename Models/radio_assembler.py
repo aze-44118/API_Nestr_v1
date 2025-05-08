@@ -3,6 +3,7 @@ import datetime
 from typing import List, Dict
 from pydub import AudioSegment
 import requests
+from Config import ELEVENLAB_API_KEY  # si ta clé vient d'un fichier de config
 from Models.google_tts_client import generate_audio_from_text_google
 from Models.elevenlab_client import generate_audio_from_text_elevenlab
 
@@ -37,19 +38,22 @@ def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr
 
     API_KEY = "ta_clé_api"
     headers = {
-        "Authorization": f"Bearer {API_KEY}",
+        "xi-api-key": ELEVENLAB_API_KEY,
         "Content-Type": "application/json"
     }
-
-
     response = requests.get("https://api.elevenlabs.io/v1/voices", headers=headers)
     voices = response.json()
+
 
     print("=== Résultat brut de l'API ===")
     print(voices)
 
-    for voice in voices['voices']:
-        print(f"{voice['name']}: {voice['voice_id']}")
+    if "voices" in voices:
+        for voice in voices["voices"]:
+            print(f"{voice['name']}: {voice['voice_id']}")
+    else:
+        print("❌ Clé 'voices' absente dans la réponse ElevenLabs.")
+
 
 
     audio_segments = []
