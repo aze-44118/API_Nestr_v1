@@ -45,7 +45,8 @@ try:
     STATIC_FOLDER         = secrets.get("STATIC_FOLDER", "Static")
     DATABASE_URL          = secrets["DATABASE_URL"]
     GOOGLE_CREDENTIALS_PATH = secrets.get("GOOGLE_APPLICATION_CREDENTIALS_PATH", "Config/google_credentials.json")
-    ELEVENLAB_API_KEY = secrets.get["ELEVENLAB_API_KEY"]
+    ELEVENLAB_API_KEY = secrets.get("ELEVENLAB_API_KEY")
+
 
 
 
