@@ -17,6 +17,7 @@ def generate_audio_from_text_elevenlab(text: str, user_id: str) -> str:
             "xi-api-key": ELEVENLAB_API_KEY,
             "Content-Type": "application/json"
         }
+
         payload = {
             "text": text,
             "model_id": "eleven_multilingual_v2",
