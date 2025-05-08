@@ -13,11 +13,6 @@ def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: s
     try:
         # Convertir le texte JSON en Python
         script_json = json.loads(podcast_text)
-
-        script_json = json.loads(podcast_text)
-        audio_path = generate_multivoice_podcast(script_json, user_id)  
-        
-        audio_path = generate_multivoice_podcast(script_json, user_id)
       
 
         # ─── MODE TEST ───────────────────────────────────────────────────────────────
@@ -27,7 +22,7 @@ def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: s
 
           
         # ─── MODE PROD ──────────────────────────────────────────────────────────────
-        audio_path = generate_multivoice_podcast(podcast_text, user_id)
+        audio_path = generate_multivoice_podcast(script_json, user_id)
         # ─── FIN MODE PROD ──────────────────────────────────────────────────────────
 
 
