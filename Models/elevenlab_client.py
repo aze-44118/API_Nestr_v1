@@ -1,7 +1,8 @@
 import os
 import requests
+from Config import ELEVENLAB_API_KEY  # charge dynamiquement via ta edge function
 
-ELEVENLAB_API_KEY = os.environ.get("ELEVENLAB_API_KEY")
+
 ELEVENLAB_VOICE_ID = os.environ.get("ELEVENLAB_VOICE_ID", "EXAVITQu4vr4xnSDxMaL")  # Voix par défaut
 
 def generate_audio_from_text_elevenlab(text: str, user_id: str, voice_id: str = None) -> str:
