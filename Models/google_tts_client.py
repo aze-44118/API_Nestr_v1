@@ -18,7 +18,7 @@ def generate_audio_from_text_google(podcast_text: str, user_id: str, voice_name:
     synthesis_input = texttospeech.SynthesisInput(text=podcast_text)
 
     voice = texttospeech.VoiceSelectionParams(
-        language_code="fr-FR",
+        language_code="en-US",
         name=voice_name
     )
 
