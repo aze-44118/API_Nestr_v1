@@ -33,6 +33,20 @@ def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr
     :param user_id: utilisé pour nommer le fichier
     :return: chemin du fichier MP3 final
     """
+
+    API_KEY = "ta_clé_api"
+    headers = {
+        "xi-api-key": API_KEY,
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get("https://api.elevenlabs.io/v1/voices", headers=headers)
+    voices = response.json()
+
+    for voice in voices['voices']:
+        print(f"{voice['name']}: {voice['voice_id']}")
+
+
     audio_segments = []
 
     temp_files = []  # ← on stocke ici tous les chemins de fichiers MP3 générés
