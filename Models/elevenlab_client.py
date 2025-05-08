@@ -13,7 +13,7 @@ def generate_audio_from_text_elevenlab(text: str, user_id: str) -> str:
 
         url = f"https://api.elevenlabs.io/v1/text-to-speech/{ELEVENLAB_VOICE_ID}"
         headers = {
-            "Authorization": f"Bearer {ELEVENLAB_API_KEY}",
+            "Authorization": f"Bearer {"sk_ce676d62a6dcb4910094211bfe884c83b2ed3190291e1917"}",
             "Content-Type": "application/json"
         }
 
