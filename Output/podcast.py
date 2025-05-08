@@ -1,5 +1,6 @@
 import os
 import datetime
+import json
 import xml.etree.ElementTree as ET
 from Models.radio_assembler import generate_multivoice_podcast
 from Supabase.supabase_client import get_client
@@ -10,12 +11,18 @@ def send_podcast(user_id: str, podcast_text: str, first_name: str, user_token: s
     supabase = get_client()
 
     try:
+        # Convertir le texte JSON en Python
+        script_json = json.loads(podcast_text)
+
+        audio_path = generate_multivoice_podcast(script_json, user_id)
+      
 
         # ─── MODE TEST ───────────────────────────────────────────────────────────────
         # Commente cette ligne pour repasser en production
         # audio_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "Static", "50b27131-0cb3-4813-a25b-89e2589f5388_podcast.mp3"))
         # ─── FIN MODE TEST ──────────────────────────────────────────────────────────
 
+          
         # ─── MODE PROD ──────────────────────────────────────────────────────────────
         audio_path = generate_multivoice_podcast(podcast_text, user_id)
         # ─── FIN MODE PROD ──────────────────────────────────────────────────────────
