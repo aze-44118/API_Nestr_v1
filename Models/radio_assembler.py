@@ -37,9 +37,10 @@ def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr
 
     API_KEY = "ta_clé_api"
     headers = {
-        "xi-api-key": API_KEY,
+        "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
     }
+
 
     response = requests.get("https://api.elevenlabs.io/v1/voices", headers=headers)
     voices = response.json()
