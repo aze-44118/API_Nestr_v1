@@ -9,8 +9,7 @@ def generate_audio_from_text_elevenlab(text: str, user_id: str) -> str:
         if not ELEVENLAB_API_KEY:
             raise ValueError("❌ API Key ElevenLabs manquante.")
         
-        selected_voice_id = voice_id or ELEVENLAB_VOICE_ID
-        url = f"https://api.elevenlabs.io/v1/text-to-speech/{selected_voice_id}"
+        print("🔑 Clé ElevenLabs chargée :", ELEVENLAB_API_KEY)
 
         url = f"https://api.elevenlabs.io/v1/text-to-speech/{ELEVENLAB_VOICE_ID}"
         headers = {
