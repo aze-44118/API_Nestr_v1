@@ -17,7 +17,7 @@ VOICE_PROFILES = {
     "Melanie": "en-US-Neural2-G",
     "Alison": "en-US-Neural2-H",
 }
-
+"""
 ELEVENLAB_PROFILES = {
     "Walter": "J4Gklq1lvygedV6xCpKJ",     # Mister
     "Rebecca": "wLoW00IP5kfH8oiOBAPp",    # Grant wittman
@@ -25,12 +25,12 @@ ELEVENLAB_PROFILES = {
     "Mélanie": "aD6riP1btT197c6dACmy",    # Rachel M
     "Alison": "xctasy8XvGp2cVO9HL9k",     # Alison
 }
-
+"""
 INTRO_PATH = "Static/intro.mp3"
 OUTRO_PATH = "Static/outro.mp3"
 TEMP_DIR = "/tmp"
 
-def generate_multivoice_podcast(script: str, user_id: str, voice_name: str = "fr-FR-Wavenet-A") -> str:
+def generate_multivoice_podcast(script: str, user_id: str) -> str:  # , voice_name: str = "fr-FR-Wavenet-A"
     """
     Génère un podcast multi-voix avec générique depuis un script JSON.
     :param script: liste d'objets {"speaker": "...", "text": "..."}
