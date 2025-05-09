@@ -24,10 +24,14 @@ for name, val in [
         raise RuntimeError(f"Env var '{name}' missing")
 
 # 5) Récupère TOUS les secrets depuis l’edge function
+headers = {
+    "Authorization": f"Bearer {SUPABASE_ANON_KEY}"
+}
 resp = requests.get(
     SUPABASE_EDGE_URL,
-    { "Authorization": f"Bearer {SUPABASE_SERVICE_ROLE_KEY}" }
+    headers=headers  # ✅ ici on passe bien l’Authorization dans les headers HTTP
 )
+
 resp.raise_for_status()
 secrets = resp.json()
 
