@@ -1,32 +1,51 @@
-/mon_briefing_project/
+/API_NESTR_V1_MAIN/                   # Racine du projet – Daily briefing API
 │
-├── config/                    # Fichiers de configuration et variables d'environnement
-│   ├── .env                   # Clés API, réglages utilisateur
-│   └── settings.py            # Chargement de .env et configuration globale
+├── config/                          # Fichiers de configuration & variables d’environnement
+│   ├── .env                         # Variables d’environnement (API keys, etc.)
+│   ├── config.py                    # Chargement de .env et configuration globale
+│   └── google_credentials.json      # Clé JSON pour Google APIs
 │
-├── data_fetchers/            # Récupération data - Input: user_id - Output: Raw Data
-│   ├── météo.py
-│   ├── calendrier.py
-│   └── news.py
+├── data_fetchers/                   # Récupération des données – Input: user_id → Raw Data
+│   ├── __init__.py
+│   ├── calendar.py                  # Récupère les événements du calendrier
+│   ├── news.py                      # Récupère les dernières actualités
+│   └── weather.py                   # Récupère la météo
 │
-├── models/                   # Gestion des LLM (OpenAI, Mistral...)
-│   ├── openai_client.py      # A ajouter plus tard pour le TTS
-│   ├── mistral_client.py
-│   └── generator.py          # Recuperation des data - Input: user_id - Output: summary_data
+├── models/                          # Gestion des LLM & logique de génération
+│   ├── __init__.py
+│   ├── openai_client.py             # Client OpenAI pour texte
+│   ├── mistral_client.py            # Client Mistral OS (script & email)
+│   ├── elevenlab_client.py          # Client ElevenLabs pour TTS
+│   ├── google_tts_client.py         # Client Google TTS
+│   ├── generator.py                 # Orchestration des fetchers → summary_data
+│   └── radio_assembler.py           # Assemblage multi-voix pour le format radio
 │
-├── supabase/                 # Connexion et accès aux préférences utilisateurs
-│   ├── supabase_client.py
-│   └── user_data.py
+├── supabase/                        # Connexion & accès aux préférences utilisateur
+│   ├── __init__.py
+│   ├── supabase_client.py           # Initialisation du client Supabase
+│   ├── supabase_storage_api.py      # Wrapper pour le Storage (upload MP3, RSS…)
+│   └── user_data.py                 # Chargement des settings & dernières localisations
 │
-├── output/                   # Distribution du résultat (email, podcast, RSS...)
-│   ├── email.py
-│   └── audio.py              # (futur TTS : Bark, Coqui, etc.)
+├── output/                          # Distribution du briefing (email, podcast, RSS…)
+│   ├── __init__.py
+│   ├── email.py                     # Génération et envoi d’email via Brevo
+│   └── podcast.py                   # Génération du RSS / upload du MP3
 │
-├── utils/                    # Fonctions utilitaires (formatage, logs...)
-│   └── formatter.py
+├── routes/                          # Points d’entrée de l’API (Flask blueprints)
+│   ├── __init__.py
+│   ├── briefing.py                  # Blueprint /api/briefing
+│   └── settings.py                  # Blueprint /api/settings
 │
-├── Route/                    # Fonctions utilitaires (formatage, logs...)
-│   └── briefing.py           # BP de clanchement du brief
+├── static/                          # Ressources statiques (templates, médias…)
+│   ├── __init__.py
+│   ├── 50b27131-0cb3-4813-a25b-89e25….mp3  # Exemples de MP3 de test
+│   └── email_template.html          # Template HTML pour les emails
 │
-├── briefing.py               # Script principal ou CLI
-└── requirements.txt          # Dépendances Python
+├── utils/                           # Fonctions utilitaires (formatage, logs…)
+│   ├── __init__.py
+│   └── helpers.py                   # Utils divers (format dates, logs custom…)
+│
+├── app.py                           # Point d’entrée de l’application (Flask app)
+├── requirements.txt                 # Liste des dépendances Python
+├── structure.txt                    # Arborescence de référence (cette photo 2)
+└── tailwind.config.js               # Config Tailwind CSS (si front intégré)
