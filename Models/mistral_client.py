@@ -38,16 +38,20 @@ def nestr_briefing_script(user_message: str) -> str | None:
         return None
 
 def nestr_daily_mood(user_message: str) -> dict | None:
-    """
-    Envoie le prompt à l'agent mood (AGENT_MOOD) et retourne le JSON parsé.
-    """
     from json import loads
     try:
-        response = client.agents.complete(
+        resp = client.agents.complete(
             agent_id=AGENT_MOOD,
             messages=[{"role": "user", "content": user_message}],
         )
-        return loads(response.choices[0].message.content)
+        raw = resp.choices[0].message.content or ""
+        print("🔍 RAW MOOD RESPONSE:", repr(raw))   # <— ajoute ce log
+        # Si le modèle embed des backticks, on les enlève :
+        if raw.startswith("```"):
+            # enlève ```json  ``` éventuels
+            raw = raw.strip("```").replace("json", "").strip()
+        return loads(raw)
     except Exception as e:
         print(f"❌ Mistral Error (mood): {e}")
         return None
+
