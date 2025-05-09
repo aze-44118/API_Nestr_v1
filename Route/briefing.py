@@ -7,6 +7,7 @@ from Models.mistral_client import nestr_briefing_courriel, nestr_briefing_script
 from Output.email import send_email 
 from Output.podcast import send_podcast
 from Supabase.supabase_client import supabase
+from Models.mistral_client import nestr_daily_mood
 import traceback
 
 
@@ -76,6 +77,10 @@ def generate_briefing():
             return jsonify({"error": "no response from courriel agent"}), 502
         '''
 
+        # 6.2 Appel IA pour analyse de donnees
+        mood_json = nestr_daily_mood(data_brut)
+        if not isinstance(mood_json, dict):
+           return jsonify({"error": "no mood analysis response"}), 502
 
 
         # ⑦ Output email
@@ -115,6 +120,7 @@ def generate_briefing():
             "status": "success",
             # "message": email_text,
             "raw": data_brut,
+            "mood": mood_json,
             "html": rss_url,
             "podcast": podcast_text
         }), 200
