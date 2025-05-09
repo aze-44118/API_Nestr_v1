@@ -11,7 +11,7 @@ def fetch_calendar(urls: List[str]) -> List[Dict[str, Any]]:
     for url in urls:
         r = requests.get(url)
         r.raise_for_status()
-        for cal in Calendar.parse_multiple(r.text):
+        for cal in Calendar.parse_multiple([r.text]):
             for ev in cal.timeline.today():
                 events.append({
                     "title":       ev.name,
